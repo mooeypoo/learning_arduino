@@ -29,12 +29,20 @@ double music_jagerlust[][2] = {
   {NOTE_C6, 0.5}
 };
 // Define the music - Hallelujah
+// https://musescore.com/user/21965011/scores/4217351
 double music_hallelujah[][2] = {
   {NOTE_E5, 0.5}, {NOTE_G5, 1}, {NOTE_G5, 0.5}, {NOTE_G5, 1}, {NOTE_G5, 0.5},
   {NOTE_A5, 0.5}, {NOTE_A5, 0.5}, {NOTE_A5, 1.5}, {NOTE_E5, 0.5}, {NOTE_G5, 1}, {NOTE_G5, 0.5}, {NOTE_G5, 1},
   {NOTE_G5, 0.5},
   {NOTE_A5, 0.5}, {NOTE_A5, 0.5}, {NOTE_A5, 1.5}, {NOTE_G5, 0.5}, {NOTE_A5, 1}, {NOTE_A5, 1}, {NOTE_A5, 0.5}, {NOTE_A5, 0.5},
   {NOTE_A5, 1}, {NOTE_G5, 0.5}, {NOTE_G5, 1}, {NOTE_F5, 0.5}, {NOTE_G5, 1.5}, {NOTE_G5, 1.5}
+};
+// Define the music - Yakety Sax - Benny Hill Theme
+// https://musescore.com/user/152066/scores/152784
+double music_yaketisax[][2] = {
+  {NOTE_D6, 2}, {NOTE_G6, 1}, {NOTE_G6, 1},
+  {NOTE_E6, 0.5}, {NOTE_D6, 0.5}, {NOTE_B5, 0.5}, {NOTE_G5, 0.5},
+  {NOTE_D6, 1}, {NOTE_E6, 1}, {NOTE_D6, 0.5}, {NOTE_B5, 0.5}, {NOTE_A5, 1}
 };
 
 /* FUNCTIONALITY */
@@ -54,7 +62,7 @@ void setup() {
 
   // Set up the music
   numOfNotes = sizeof(music_hallelujah)/sizeof(music_hallelujah[0]);
-  player.setBeat(500);
+  player.setBeat(600);
 
   isItPlaying = false;
 }
