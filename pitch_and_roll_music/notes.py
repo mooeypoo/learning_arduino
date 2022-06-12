@@ -1,0 +1,218 @@
+# Supportive variables and functions for tones and frequencies
+#
+# Created by Moriel Schottlender (mooeypoo) 2022
+#
+# License: GPLv3
+
+
+# Tones and frequencies
+# Adapted from https://docs.arduino.cc/built-in-examples/digital/toneMelody
+notes = {
+    'B0': 31,
+    'C1': 33,
+    'CS1': 35,
+    'D1': 37,
+    'DS1': 39,
+    'E1': 41,
+    'F1': 44,
+    'FS1': 46,
+    'G1': 49,
+    'GS1': 52,
+    'A1': 55,
+    'AS1': 58,
+    'B1': 62,
+    'C2': 65,
+    'CS2': 69,
+    'D2': 73,
+    'DS2': 78,
+    'E2': 82,
+    'F2': 87,
+    'FS2': 93,
+    'G2': 98,
+    'GS2': 104,
+    'A2': 110,
+    'AS2': 117,
+    'B2': 123,
+    'C3': 131,
+    'CS3': 139,
+    'D3': 147,
+    'DS3': 156,
+    'E3': 165,
+    'F3': 175,
+    'FS3': 185,
+    'G3': 196,
+    'GS3': 208,
+    'A3': 220,
+    'AS3': 233,
+    'B3': 247,
+    'C4': 262,
+    'CS4': 277,
+    'D4': 294,
+    'DS4': 311,
+    'E4': 330,
+    'F4': 349,
+    'FS4': 370,
+    'G4': 392,
+    'GS4': 415,
+    'A4': 440,
+    'AS4': 466,
+    'B4': 494,
+    'C5': 523,
+    'CS5': 554,
+    'D5': 587,
+    'DS5': 622,
+    'E5': 659,
+    'F5': 698,
+    'FS5': 740,
+    'G5': 784,
+    'GS5': 831,
+    'A5': 880,
+    'AS5': 932,
+    'B5': 988,
+    'C6': 1047,
+    'CS6': 1109,
+    'D6': 1175,
+    'DS6': 1245,
+    'E6': 1319,
+    'F6': 1397,
+    'FS6': 1480,
+    'G6': 1568,
+    'GS6': 1661,
+    'A6': 1760,
+    'AS6': 1865,
+    'B6': 1976,
+    'C7': 2093,
+    'CS7': 2217,
+    'D7': 2349,
+    'DS7': 2489,
+    'E7': 2637,
+    'F7': 2794,
+    'FS7': 2960,
+    'G7': 3136,
+    'GS7': 3322,
+    'A7': 3520,
+    'AS7': 3729,
+    'B7': 3951,
+    'C8': 4186,
+    'CS8': 4435,
+    'D8': 4699,
+    'DS8': 4978
+}
+
+tone_freqs = [
+    31,
+    33,
+    35,
+    37,
+    39,
+    41,
+    44,
+    46,
+    49,
+    52,
+    55,
+    58,
+    62,
+    65,
+    69,
+    73,
+    78,
+    82,
+    87,
+    93,
+    98,
+    104,
+    110,
+    117,
+    123,
+    131,
+    139,
+    147,
+    156,
+    165,
+    175,
+    185,
+    196,
+    208,
+    220,
+    233,
+    247,
+    262,
+    277,
+    294,
+    311,
+    330,
+    349,
+    370,
+    392,
+    415,
+    440,
+    466,
+    494,
+    523,
+    554,
+    587,
+    622,
+    659,
+    698,
+    740,
+    784,
+    831,
+    880,
+    932,
+    988,
+    1047,
+    1109,
+    1175,
+    1245,
+    1319,
+    1397,
+    1480,
+    1568,
+    1661,
+    1760,
+    1865,
+    1976,
+    2093,
+    2217,
+    2349,
+    2489,
+    2637,
+    2794,
+    2960,
+    3136,
+    3322,
+    3520,
+    3729,
+    3951,
+    4186,
+    4435,
+    4699,
+    4978
+]
+
+# Get a frequency within a given range that
+# is representative of the fraction given
+def getFreqFromFraction(frac, tone_start = "B0", tone_end = "DS8"):
+    tone_range = notes[tone_end] - notes[tone_start]
+    return notes[tone_start] + (frac * tone_range)
+
+# From a fraction that represent a position
+# within a certain range, get the frequency of the tone
+# of the tone that is in the same position
+# from the given range of tones
+def getToneFromFraction(frac, tone_start = "B0", tone_end = "DS8"):
+    # Find the indeces of the start and end of the range
+    freq_start = notes[tone_start]
+    freq_end = notes[tone_end]
+    # Get the freq index values from the frequencies array
+    index_start = tone_freqs.index(freq_start)
+    index_end = tone_freqs.index(freq_end)
+    # Use these indeces to create a sub-array of the frequencies
+    rangearr = tone_freqs[index_start : index_end]
+    # now get the fractional position from the range array
+    position_index = round(frac * len(rangearr)) - 1
+    if position_index < 0:
+        position_index = 0
+    # return the tone frequency
+    return rangearr[position_index]
